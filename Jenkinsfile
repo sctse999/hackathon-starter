@@ -1,19 +1,9 @@
-pipeline {
-    agent any
-    stages {
-
-
-        stage('Image') {
-            steps {
-                sh "git rev-parse HEAD > .git/commit-id"
-                def commit_id = readFile('.git/commit-id').trim()
-                println commit_id
-                println ${env.version}
-                def app = docker.build "hackathon"
-            }
-
-
+node {
+    stage('Example') {
+        if (env.BRANCH_NAME == 'master') {
+            echo 'I only execute on the master branch'
+        } else {
+            echo 'I execute elsewhere'
         }
     }
-
 }
