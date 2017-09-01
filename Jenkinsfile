@@ -11,7 +11,7 @@ node {
     }
 
     stage('Publish image') {
-        docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
+        docker.withRegistry('https://registry.hub.docker.com', 'docker_hub') {
             app.push 'master'
             app.push "${commit_id}"
         }
