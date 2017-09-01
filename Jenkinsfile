@@ -7,7 +7,7 @@ node {
         def commit_id = readFile('.git/commit-id').trim()
         println commit_id
         println env.version
-        app = docker.build "hackathon"
+        app = docker.build "proactivehk/hackathon"
     }
 
     stage('Publish image') {
