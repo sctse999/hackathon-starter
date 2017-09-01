@@ -1,23 +1,17 @@
 node {
-    stage('Image') {
+    def app;
+    checkout scm
 
-        println env.BRANCH_NAME
-
+    stage('Build image') {
         sh "git rev-parse HEAD > .git/commit-id"
         def commit_id = readFile('.git/commit-id').trim()
         println commit_id
         println env.version
-        def app = docker.build "hackathon"
-        app.push
-
+        app = docker.build "hackathon"
     }
 
-    stage('Rolling Update') {
-        sh "git rev-parse HEAD > .git/commit-id"
-        def commit_id = readFile('.git/commit-id').trim()
-        println commit_id
-        println env.version
-        def app = docker.build "hackathon"
-
+    stage('Publish image') {
+        app.push 'master'
+        app.push "${commit_id}"
     }
 }
