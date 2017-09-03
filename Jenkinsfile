@@ -16,4 +16,8 @@ node {
             app.push "${commit_id}"
         }
     }
+
+    stage('Deploy') {
+        sh "docker service ls"
+    }
 }
