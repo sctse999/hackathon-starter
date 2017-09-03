@@ -19,6 +19,6 @@ node {
     }
 
     stage('Deploy') {
-        sh "docker service update --force hackathon_web"
+        sh "docker service update --image proactivehk/hackathon:master hackathon_web"
     }
 }
